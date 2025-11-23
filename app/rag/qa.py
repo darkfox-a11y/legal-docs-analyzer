@@ -20,120 +20,155 @@ logger = logging.getLogger(__name__)
 # Configure Gemini API
 print("🤖 Configuring Gemini API...")
 genai.configure(api_key=settings.gemini_api_key)
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-2.5-flash')
 print("✅ Gemini API ready!")
 
 
-def answer_question(
-    question: str,
-    document_id: int = None,
-    top_k: int = 3
-) -> Dict:
+def answer_query(
+    query: str,  
+    document_id: int = None, 
+    top_k: int = 5,
+    detail_level: str = "detailed"
+) -> dict:
     """
-    Answer a question using RAG (Retrieval-Augmented Generation).
-    
-    How it works:
-    1. Search for relevant chunks (vector search)
-    2. Build prompt with question + chunks
-    3. Send to Gemini
-    4. Return answer + sources
-    
-    Args:
-        question: User's question
-        document_id: Optional - search specific document only
-        top_k: Number of chunks to retrieve (default 3)
-        
-    Returns:
-        Dictionary with answer, sources, and metadata
-        
-    Example:
-        result = answer_question(
-            question="What are the payment terms?",
-            document_id=1,
-            top_k=3
-        )
-        
-        # Returns:
-        {
-            "question": "What are the payment terms?",
-            "answer": "Payment is due within 30 days...",
-            "sources": [
-                {"text": "Payment is due...", "score": 0.89},
-                {"text": "Late fees apply...", "score": 0.76}
-            ]
-        }
+    Answer a query using RAG with intelligent reasoning and inference
     """
-    logger.info(f"🔍 Answering question: '{question}'")
-    
-    # Step 1: Find relevant chunks using vector search
-    logger.info(f"📚 Searching for relevant chunks (top {top_k})...")
-    relevant_chunks = search_similar_chunks(
-        query=question,
-        document_id=document_id,
-        top_k=top_k
+    # Search for relevant chunks (use imported function)
+    search_results = search_similar_chunks(  
+        query=query,
+        top_k=top_k,
+        document_id=document_id
     )
-    # 📞 CALLS vector_store.py!
     
-    if not relevant_chunks:
-        logger.warning("⚠️ No relevant chunks found")
+    if not search_results:
         return {
-            "question": question,
-            "answer": "I couldn't find any relevant information in the document to answer this question.",
+            "answer": "I couldn't find any relevant information in the document to answer your question. Please try rephrasing or asking about different aspects of the document.",
+            "context": [],
             "sources": [],
-            "confidence": "low"
+            "confidence": "none",
+            "detail_level": detail_level
         }
     
-    logger.info(f"✅ Found {len(relevant_chunks)} relevant chunks")
+    # Build context
+    context_parts = []
+    for i, result in enumerate(search_results, 1):
+        context_parts.append(f"[Excerpt {i}]:\n{result['text']}\n")
     
-    # Step 2: Build context from chunks
-    context = "\n\n".join([
-        f"[Excerpt {i+1}]:\n{chunk['text']}"
-        for i, chunk in enumerate(relevant_chunks)
-    ])
+    context = "\n".join(context_parts)
     
-    # Step 3: Build prompt for Gemini
-    prompt = f"""You are a helpful AI assistant analyzing legal documents.
+    # Enhanced prompt with reasoning capabilities
+    prompt = f"""You are an expert legal document analyzer with strong analytical and reasoning abilities. Your task is to provide comprehensive, intelligent answers based on document excerpts.
 
-Question: {question}
+**USER QUESTION:**
+{query}
 
-Relevant excerpts from the document:
-
+**RELEVANT DOCUMENT EXCERPTS:**
 {context}
 
-Instructions:
-- Answer the question based ONLY on the provided excerpts
-- Be concise and accurate
-- If the excerpts don't contain enough information, say so
-- Cite which excerpt(s) you used (e.g., "According to Excerpt 1...")
-- Use professional language appropriate for legal documents
+**YOUR TASK:**
+Provide a detailed, helpful answer following these guidelines:
 
-Answer:"""
+**1. DIRECT INFORMATION:**
+   - If the answer is explicitly stated in the excerpts, provide it directly
+   - Quote specific phrases using quotation marks
+
+**2. INFERENCE & REASONING:**
+   - If the exact answer isn't stated, use logical reasoning based on the available information
+   - Make reasonable inferences from the context provided
+   - Explain your reasoning process clearly
+   - Use phrases like "Based on the information provided..." or "From the context, we can infer..."
+
+**3. COMPARATIVE ANALYSIS:**
+   - If the question asks about alternatives or comparisons, analyze what IS stated
+   - Draw logical conclusions from the available data
+   - Provide context for understanding the implications
+
+**4. HANDLING INCOMPLETE INFORMATION:**
+   - If information is partially available, explain what you know and what's reasonable to conclude
+   - Don't just say "I can't answer" - instead, provide what insights you CAN offer
+   - Suggest what additional information would be needed for a complete answer
+
+**5. RESPONSE STRUCTURE:**
+   - Start with the most direct answer you can provide
+   - Follow with supporting details and reasoning
+   - If making inferences, clearly indicate this
+   - End with any relevant caveats or additional context
+
+**EXAMPLE APPROACH:**
+Instead of: "The excerpts don't mention X, so I can't answer."
+Better: "While the excerpts don't explicitly state X, based on the information provided about Y and Z, we can reasonably infer that... [explanation]. This suggests that..."
+
+**IMPORTANT RULES:**
+✓ Use logical reasoning and inference when direct answers aren't available
+✓ Be helpful and provide actionable insights
+✓ Always distinguish between explicit statements and inferences
+✓ Base all reasoning on information in the excerpts
+✓ Be professional and thorough
+✗ Don't make wild guesses unconnected to the document
+✗ Don't refuse to answer if you can provide useful context
+✗ Don't invent facts not supported by the excerpts
+
+**YOUR DETAILED ANSWER:**"""
     
-    logger.info("🤖 Sending to Gemini...")
-    
-    # Step 4: Get answer from Gemini
     try:
-        response = model.generate_content(prompt)
-        answer = response.text
-        logger.info("✅ Gemini response received")
+        # Create model instance here
+        gemini_model = genai.GenerativeModel('gemini-2.0-flash-exp')
         
+        # Configure for better reasoning
+        generation_config = genai.types.GenerationConfig(
+            temperature=0.4,
+            max_output_tokens=1500,
+            top_p=0.95,
+            top_k=40
+        )
+        
+        response = gemini_model.generate_content(
+            prompt,
+            generation_config=generation_config
+        )
+        answer = response.text
+        
+        # Determine confidence level
+        answer_lower = answer.lower()
+        if any(phrase in answer_lower for phrase in [
+            "explicitly states", "clearly indicates", "according to", "directly mentions"
+        ]):
+            confidence = "high"
+        elif any(phrase in answer_lower for phrase in [
+            "infer", "suggest", "might be", "could be", "possibly", "likely", "reasonably conclude"
+        ]):
+            confidence = "medium"
+        elif any(phrase in answer_lower for phrase in [
+            "cannot determine", "unclear", "insufficient information"
+        ]):
+            confidence = "low"
+        else:
+            confidence = "medium"
+            
     except Exception as e:
-        logger.error(f"❌ Gemini error: {e}")
+        logger.error(f"❌ Error generating answer: {e}")
         return {
-            "question": question,
-            "answer": "I encountered an error while generating the answer. Please try again.",
-            "sources": relevant_chunks,
-            "error": str(e)
+            "answer": f"Error generating answer: {str(e)}",
+            "context": context_parts,
+            "sources": search_results,
+            "confidence": "error",
+            "detail_level": detail_level
         }
     
-    # Step 5: Return result with sources
     return {
-        "question": question,
         "answer": answer,
-        "sources": relevant_chunks,
-        "confidence": "high" if relevant_chunks[0]['score'] > 0.7 else "medium"
+        "context": context_parts,
+        "sources": [
+            {
+                "chunk_index": src["chunk_index"],
+                "text_preview": src["text"][:200] + "..." if len(src["text"]) > 200 else src["text"],
+                "relevance_score": round(src["score"], 4)
+            }
+            for src in search_results
+        ],
+        "confidence": confidence,
+        "detail_level": detail_level
     }
-
 
 def summarize_document(document_id: int, max_chunks: int = 10) -> Dict:
     """
@@ -216,7 +251,7 @@ if __name__ == "__main__":
     print(f"Question: '{test_question}'\n")
     print("Generating answer with Gemini...\n")
     
-    result = answer_question(
+    result = answer_query(
         question=test_question,
         document_id=999,  # Test document from vector_store.py
         top_k=3

@@ -207,7 +207,7 @@ async def ask_question(
             "confidence": "high"
         }
     """
-    from app.rag.qa import answer_question
+    from app.rag.qa import answer_query
     
     # Check if document exists and belongs to user
     document = db.query(models.Document).filter(
@@ -230,8 +230,8 @@ async def ask_question(
     
     # Get answer using RAG
     try:
-        result = answer_question(
-            question=question,
+        result = answer_query(
+            query=question,
             document_id=document_id,
             top_k=3  # Return top 3 most relevant chunks
         )
