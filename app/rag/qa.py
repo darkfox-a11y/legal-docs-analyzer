@@ -14,13 +14,14 @@ import logging
 
 from app.config import settings
 from app.rag.vector_store import search_similar_chunks
+from app.rag.evaluation import evaluate_rag_pipeline
 
 logger = logging.getLogger(__name__)
 
 # Configure Gemini API
 print("🤖 Configuring Gemini API...")
 genai.configure(api_key=settings.gemini_api_key)
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-2.0-flash')
 print("✅ Gemini API ready!")
 
 
@@ -155,7 +156,8 @@ Better: "While the excerpts don't explicitly state X, based on the information p
             "detail_level": detail_level
         }
     
-    return {
+    # Prepare result
+    result = {
         "answer": answer,
         "context": context_parts,
         "sources": [
@@ -169,6 +171,25 @@ Better: "While the excerpts don't explicitly state X, based on the information p
         "confidence": confidence,
         "detail_level": detail_level
     }
+    
+    # Add evaluation metrics (optional, can be toggled)
+    try:
+        evaluation = evaluate_rag_pipeline(
+            question=query,
+            answer=answer,
+            retrieved_chunks=search_results,
+            confidence=confidence
+        )
+        result["evaluation"] = {
+            "overall_quality": evaluation["overall_quality"],
+            "retrieval_quality": evaluation["retrieval"]["avg_score"],
+            "num_high_quality_chunks": evaluation["retrieval"]["high_quality_chunks"]
+        }
+        logger.info(f"📊 Answer quality: {evaluation['overall_quality']}")
+    except Exception as e:
+        logger.warning(f"Failed to evaluate: {e}")
+    
+    return result
 
 def summarize_document(document_id: int, max_chunks: int = 10) -> Dict:
     """

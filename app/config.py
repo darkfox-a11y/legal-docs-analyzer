@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     debug: bool = True
     app_name: str = "Legal Document Analyzer"
     app_version: str = "1.0.0"
+    gcp_project_id: str = ""
+    gcs_bucket_name: str = ""
+    google_application_credentials: str = ""
 
     embeddings_model: str = "gemini-1.5-flash-embedding-002"
 

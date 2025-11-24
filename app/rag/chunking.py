@@ -1,140 +1,355 @@
 """
-Simple text chunking - breaks documents into smaller pieces.
-
-Why chunking?
-- Documents are too large to send to AI all at once
-- We split them into small chunks (paragraphs)
-- Find relevant chunks for user's question
-- Send only relevant chunks to AI (faster, cheaper!)
+Advanced document chunking strategies for optimal RAG performance.
 """
 
-from typing import List
+import re
+from typing import List, Tuple
+import logging
+
+logger = logging.getLogger(__name__)
 
 
+def semantic_chunk_with_overlap(
+    text: str,
+    chunk_size: int = 500,
+    overlap_size: int = 100,
+    min_chunk_size: int = 50
+) -> List[str]:
+    """
+    Advanced chunking with overlap for better context retention.
+    
+    Benefits:
+    - Overlap prevents losing context at chunk boundaries
+    - Semantic splitting on sentences (not random cuts)
+    - Configurable sizes for different document types
+    
+    Args:
+        text: Input text to chunk
+        chunk_size: Target characters per chunk
+        overlap_size: Overlap between chunks (prevents context loss)
+        min_chunk_size: Minimum chunk size to keep
+    
+    Returns:
+        List of text chunks with overlap
+    """
+    if not text or len(text.strip()) == 0:
+        logger.warning("Empty text provided for chunking")
+        return []
+    
+    # Split into sentences first
+    sentences = split_into_sentences(text)
+    
+    if not sentences:
+        logger.warning("No sentences found in text")
+        return []
+    
+    chunks = []
+    current_chunk = []
+    current_length = 0
+    
+    for sentence in sentences:
+        sentence_length = len(sentence)
+        
+        # If adding this sentence exceeds chunk_size
+        if current_length + sentence_length > chunk_size and current_chunk:
+            # Save current chunk
+            chunk_text = ' '.join(current_chunk)
+            if len(chunk_text) >= min_chunk_size:
+                chunks.append(chunk_text)
+            
+            # Create overlap: keep last few sentences
+            overlap_sentences = []
+            overlap_length = 0
+            for s in reversed(current_chunk):
+                if overlap_length + len(s) <= overlap_size:
+                    overlap_sentences.insert(0, s)
+                    overlap_length += len(s)
+                else:
+                    break
+            
+            # Start new chunk with overlap
+            current_chunk = overlap_sentences + [sentence]
+            current_length = overlap_length + sentence_length
+        else:
+            # Add to current chunk
+            current_chunk.append(sentence)
+            current_length += sentence_length
+    
+    # Add final chunk
+    if current_chunk:
+        chunk_text = ' '.join(current_chunk)
+        if len(chunk_text) >= min_chunk_size:
+            chunks.append(chunk_text)
+    
+    logger.info(f"✅ Created {len(chunks)} semantic chunks with overlap (avg size: {sum(len(c) for c in chunks) // len(chunks) if chunks else 0} chars)")
+    return chunks
+
+
+def split_into_sentences(text: str) -> List[str]:
+    """
+    Split text into sentences intelligently.
+    Handles abbreviations, numbers, legal citations, etc.
+    """
+    # Protect common abbreviations
+    abbreviations = {
+        'Dr.': 'Dr<DOT>',
+        'Mr.': 'Mr<DOT>',
+        'Mrs.': 'Mrs<DOT>',
+        'Ms.': 'Ms<DOT>',
+        'Sr.': 'Sr<DOT>',
+        'Jr.': 'Jr<DOT>',
+        'Inc.': 'Inc<DOT>',
+        'Ltd.': 'Ltd<DOT>',
+        'Corp.': 'Corp<DOT>',
+        'Co.': 'Co<DOT>',
+        'etc.': 'etc<DOT>',
+        'vs.': 'vs<DOT>',
+        'e.g.': 'eg<DOT>',
+        'i.e.': 'ie<DOT>',
+        'Ph.D.': 'PhD<DOT>',
+        'U.S.': 'US<DOT>',
+        'U.K.': 'UK<DOT>',
+        'No.': 'No<DOT>',
+        'Vol.': 'Vol<DOT>',
+        'Sec.': 'Sec<DOT>',
+        'Art.': 'Art<DOT>',
+        'Fig.': 'Fig<DOT>',
+        'Ref.': 'Ref<DOT>',
+        'et al.': 'etal<DOT>',
+    }
+    
+    # Replace abbreviations
+    for abbr, placeholder in abbreviations.items():
+        text = text.replace(abbr, placeholder)
+    
+    # Split on sentence boundaries
+    # Matches: . ! ? followed by space and capital letter or number
+    sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9])', text)
+    
+    # Restore abbreviations and clean
+    sentences = [
+        s.replace('<DOT>', '.').strip()
+        for s in sentences
+        if s.strip()
+    ]
+    
+    return sentences
+
+
+def hierarchical_chunking(
+    text: str,
+    max_chunk_size: int = 1000
+) -> List[Tuple[str, str]]:
+    """
+    Chunk by document structure (sections, paragraphs).
+    Best for structured legal documents.
+    
+    Returns: List of (section_title, content) tuples
+    """
+    # Common section patterns in legal documents
+    section_patterns = [
+        r'^#+\s+(.+)$',  # Markdown headers
+        r'^(\d+\.?\s+[A-Z][A-Za-z\s]+)$',  # "1. SECTION NAME" or "1 SECTION NAME"
+        r'^([A-Z][A-Z\s]{3,}):?$',  # ALL CAPS headers
+        r'^(Article\s+[IVX\d]+[:\.]?\s*.*)$',  # Article I, Article 1
+        r'^(Section\s+\d+[:\.]?\s*.*)$',  # Section 1
+        r'^(WHEREAS.*)$',  # Contract clauses
+        r'^(NOW THEREFORE.*)$',
+        r'^(SCHEDULE\s+[A-Z0-9]+.*)$',  # Schedules/Appendices
+        r'^(EXHIBIT\s+[A-Z0-9]+.*)$',
+        r'^(APPENDIX\s+[A-Z0-9]+.*)$',
+    ]
+    
+    chunks = []
+    current_section = "Preamble"
+    current_content = []
+    
+    paragraphs = text.split('\n\n')
+    
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        
+        # Check if this is a section header
+        is_header = False
+        for pattern in section_patterns:
+            match = re.match(pattern, para, re.MULTILINE | re.IGNORECASE)
+            if match:
+                # Save previous section
+                if current_content:
+                    content = '\n\n'.join(current_content)
+                    if len(content) > 50:  # Minimum content length
+                        # Split large sections
+                        if len(content) > max_chunk_size:
+                            sub_chunks = semantic_chunk_with_overlap(
+                                content, 
+                                chunk_size=max_chunk_size,
+                                overlap_size=100
+                            )
+                            for i, sub_chunk in enumerate(sub_chunks):
+                                chunks.append((f"{current_section} (Part {i+1})", sub_chunk))
+                        else:
+                            chunks.append((current_section, content))
+                
+                # Start new section
+                current_section = para[:100]  # Limit header length
+                current_content = []
+                is_header = True
+                break
+        
+        if not is_header:
+            current_content.append(para)
+    
+    # Add final section
+    if current_content:
+        content = '\n\n'.join(current_content)
+        if len(content) > 50:
+            if len(content) > max_chunk_size:
+                sub_chunks = semantic_chunk_with_overlap(
+                    content, 
+                    chunk_size=max_chunk_size,
+                    overlap_size=100
+                )
+                for i, sub_chunk in enumerate(sub_chunks):
+                    chunks.append((f"{current_section} (Part {i+1})", sub_chunk))
+            else:
+                chunks.append((current_section, content))
+    
+    logger.info(f"✅ Created {len(chunks)} hierarchical chunks from document structure")
+    return chunks
+
+
+def smart_chunking(
+    text: str,
+    document_type: str = "general",
+    chunk_size: int = 500,
+    overlap_size: int = 100
+) -> List[str]:
+    """
+    Automatically choose best chunking strategy based on document type.
+    
+    Document Types:
+    - "contract": Legal contracts (uses hierarchical)
+    - "legal": Legal documents (uses hierarchical)
+    - "report": Reports/articles (uses semantic with overlap)
+    - "general": Default (uses semantic with overlap)
+    
+    Args:
+        text: Document text
+        document_type: Type of document
+        chunk_size: Target size for chunks
+        overlap_size: Overlap between chunks
+    
+    Returns:
+        Optimally chunked text
+    """
+    logger.info(f"📄 Smart chunking for document type: '{document_type}' ({len(text)} chars)")
+    
+    if not text or len(text.strip()) == 0:
+        logger.warning("Empty text provided")
+        return []
+    
+    # Normalize document type
+    doc_type = document_type.lower().strip()
+    
+    # Check if document has clear structure
+    has_structure = bool(re.search(
+        r'(^#+\s+|^\d+\.\s+[A-Z]|^[A-Z][A-Z\s]{3,}:|^Article\s+|^Section\s+|^WHEREAS)',
+        text,
+        re.MULTILINE
+    ))
+    
+    if doc_type in ["contract", "legal", "agreement"] or has_structure:
+        # Use hierarchical chunking for structured legal documents
+        logger.info("Using hierarchical chunking (structured document)")
+        hierarchical = hierarchical_chunking(text, max_chunk_size=chunk_size * 2)
+        
+        # Flatten: just return content, prepend section name
+        chunks = []
+        for section, content in hierarchical:
+            chunk_text = f"[{section}]\n{content}"
+            chunks.append(chunk_text)
+        
+        return chunks
+    
+    else:
+        # Use semantic chunking with overlap for other documents
+        logger.info(f"Using semantic chunking with overlap (chunk_size={chunk_size}, overlap={overlap_size})")
+        return semantic_chunk_with_overlap(
+            text,
+            chunk_size=chunk_size,
+            overlap_size=overlap_size
+        )
+
+
+# Backward compatibility - keep old function name
 def simple_chunk_by_sentences(text: str, sentences_per_chunk: int = 5) -> List[str]:
     """
-    Split text into chunks by sentences (BEST for legal documents).
-    
-    How it works:
-    1. Split text into sentences (at periods)
-    2. Group sentences together (5 sentences = 1 chunk)
-    3. Return list of chunks
-    
-    Example:
-        text = "Sentence 1. Sentence 2. Sentence 3. Sentence 4. Sentence 5. Sentence 6."
-        chunks = simple_chunk_by_sentences(text, sentences_per_chunk=2)
-        
-        Result:
-        [
-            "Sentence 1. Sentence 2.",
-            "Sentence 3. Sentence 4.",
-            "Sentence 5. Sentence 6."
-        ]
-    
-    Args:
-        text: Full document text
-        sentences_per_chunk: How many sentences per chunk (default 5 = ~1 paragraph)
-        
-    Returns:
-        List of text chunks
+    Legacy simple chunking - DEPRECATED
+    Use smart_chunking() or semantic_chunk_with_overlap() instead
     """
-    # Step 1: Split text into sentences
-    # Replace ". " with ".|" then split on "|"
-    # This keeps the period with the sentence
-    sentences = text.replace('. ', '.|').split('|')
-    
-    # Step 2: Group sentences into chunks
-    chunks = []
-    
-    # Loop through sentences, taking sentences_per_chunk at a time
-    for i in range(0, len(sentences), sentences_per_chunk):
-        # Take the next sentences_per_chunk sentences
-        chunk_sentences = sentences[i:i + sentences_per_chunk]
-        
-        # Join them back into one string
-        chunk = " ".join(chunk_sentences)
-        
-        # Only add if not empty
-        if chunk.strip():
-            chunks.append(chunk.strip())
-    
-    return chunks
+    logger.warning("simple_chunk_by_sentences is deprecated, use smart_chunking instead")
+    return semantic_chunk_with_overlap(text, chunk_size=500, overlap_size=100)
 
 
-def chunk_text(text: str, chunk_size: int = 1000) -> List[str]:
-    """
-    Simple chunking by character count (backup method).
-    
-    How it works:
-    1. If text is short (< chunk_size), return as-is
-    2. Otherwise, split every chunk_size characters
-    
-    Example:
-        text = "A" * 3000  # 3000 A's
-        chunks = chunk_text(text, chunk_size=1000)
-        
-        Result: ["AAA..." (1000 chars), "AAA..." (1000 chars), "AAA..." (1000 chars)]
-    
-    Args:
-        text: Full document text
-        chunk_size: Max characters per chunk (default 1000)
-        
-    Returns:
-        List of text chunks
-    """
-    # If text is already small, no need to chunk
-    if len(text) <= chunk_size:
-        return [text]
-    
-    chunks = []
-    
-    # Split text every chunk_size characters
-    for i in range(0, len(text), chunk_size):
-        chunk = text[i:i + chunk_size]
-        chunks.append(chunk)
-    
-    return chunks
-
-
-# Test the functions
+# Test when run directly
 if __name__ == "__main__":
-    print("=== Testing Chunking Module ===\n")
+    print("\n" + "="*70)
+    print("🧪 Testing Advanced Chunking Strategies")
+    print("="*70 + "\n")
     
-    # Sample legal text
-    sample_text = """
-    This Agreement is entered into on January 1, 2024. 
-    The parties agree to the following terms and conditions. 
-    Payment shall be made within thirty days of invoice date. 
-    Late payments will incur a fee of 1.5% per month. 
-    Either party may terminate this agreement with 60 days written notice. 
-    All disputes shall be resolved through binding arbitration. 
-    This agreement is governed by the laws of California.
+    test_contract = """
+    EMPLOYMENT AGREEMENT
+    
+    This Employment Agreement ("Agreement") is entered into as of January 1, 2024.
+    
+    1. POSITION AND DUTIES
+    
+    The Employee shall serve as Senior Software Engineer. The Employee agrees to 
+    perform all duties assigned. The Employee shall report to the CTO.
+    
+    2. COMPENSATION
+    
+    The Company shall pay Employee a base salary of $150,000 per year. Salary 
+    shall be paid bi-weekly. The Employee is eligible for annual bonuses.
+    
+    3. BENEFITS
+    
+    The Employee shall be entitled to health insurance. The Company provides 
+    dental and vision coverage. Employee receives 15 days PTO per year.
+    
+    4. TERMINATION
+    
+    Either party may terminate this Agreement with 30 days notice. Upon termination,
+    all company property must be returned. Final payment will be made within 14 days.
     """
     
-    print("Original text:")
-    print(sample_text)
-    print("\n" + "="*60 + "\n")
+    print("\n1️⃣  SEMANTIC CHUNKING WITH OVERLAP")
+    print("-" * 70)
+    semantic = semantic_chunk_with_overlap(
+        test_contract, 
+        chunk_size=200, 
+        overlap_size=50
+    )
+    for i, chunk in enumerate(semantic, 1):
+        print(f"\nChunk {i} ({len(chunk)} chars):")
+        print(chunk[:150] + "..." if len(chunk) > 150 else chunk)
     
-    # Test 1: Chunk by sentences (2 sentences per chunk)
-    print("TEST 1: Chunking by sentences (2 sentences per chunk)\n")
-    sentence_chunks = simple_chunk_by_sentences(sample_text, sentences_per_chunk=2)
+    print("\n\n2️⃣  HIERARCHICAL CHUNKING")
+    print("-" * 70)
+    hierarchical = hierarchical_chunking(test_contract)
+    for section, content in hierarchical:
+        print(f"\n📋 Section: {section}")
+        print(f"Content ({len(content)} chars): {content[:100]}...")
     
-    for i, chunk in enumerate(sentence_chunks, 1):
-        print(f"Chunk {i}:")
-        print(f"  {chunk}")
-        print()
+    print("\n\n3️⃣  SMART CHUNKING (contract type)")
+    print("-" * 70)
+    smart = smart_chunking(test_contract, document_type="contract", chunk_size=300)
+    for i, chunk in enumerate(smart, 1):
+        print(f"\nChunk {i} ({len(chunk)} chars):")
+        print(chunk[:150] + "..." if len(chunk) > 150 else chunk)
     
-    print("="*60 + "\n")
-    
-    # Test 2: Chunk by characters (100 chars per chunk)
-    print("TEST 2: Chunking by characters (100 chars per chunk)\n")
-    char_chunks = chunk_text(sample_text, chunk_size=100)
-    
-    for i, chunk in enumerate(char_chunks, 1):
-        print(f"Chunk {i} ({len(chunk)} chars):")
-        print(f"  {chunk[:50]}...")  # Show first 50 chars
-        print()
-    
-    print("="*60)
-    print(f"\n✅ Created {len(sentence_chunks)} sentence chunks")
-    print(f"✅ Created {len(char_chunks)} character chunks")
+    print("\n\n" + "="*70)
+    print("✅ Chunking tests complete!")
+    print("="*70 + "\n")

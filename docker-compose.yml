@@ -17,8 +17,11 @@ services:
       - QDRANT_COLLECTION_NAME=${QDRANT_COLLECTION_NAME}
       - ENVIRONMENT=${ENVIRONMENT}
       - DEBUG=${DEBUG}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GCS_BUCKET_NAME=${GCS_BUCKET_NAME}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
     volumes:
-      - ./uploads:/app/uploads
+      - ./gcs-key.json:/app/gcs-key.json:ro
     restart: unless-stopped
     networks:
       - app-network
