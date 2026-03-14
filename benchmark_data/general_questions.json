@@ -1,0 +1,50 @@
+[
+  {
+    "id": "prohibited_use",
+    "category": "restrictions",
+    "prompt": "What conduct or activities does this document prohibit or restrict?",
+    "expected_keywords": ["prohibit", "restrict", "illegal", "misuse", "not allowed"]
+  },
+  {
+    "id": "termination",
+    "category": "termination",
+    "prompt": "How can access, service, or the agreement be suspended, terminated, or cancelled?",
+    "expected_keywords": ["terminate", "suspend", "cancel", "end", "violation"]
+  },
+  {
+    "id": "liability",
+    "category": "risk",
+    "prompt": "What liability limits, disclaimers, or damages exclusions are described?",
+    "expected_keywords": ["liability", "damages", "disclaimer", "exclude", "limit"]
+  },
+  {
+    "id": "governing_law",
+    "category": "disputes",
+    "prompt": "What governing law, forum, arbitration, or dispute-resolution rules are stated?",
+    "expected_keywords": ["law", "jurisdiction", "arbitration", "court", "dispute"]
+  },
+  {
+    "id": "privacy_data_use",
+    "category": "privacy",
+    "prompt": "How does the document describe collecting, using, sharing, or retaining personal or customer data?",
+    "expected_keywords": ["collect", "use", "share", "retain", "data"]
+  },
+  {
+    "id": "payment_fees",
+    "category": "commercial",
+    "prompt": "What payment, billing, subscription, or refund terms are described?",
+    "expected_keywords": ["payment", "billing", "subscription", "refund", "fee"]
+  },
+  {
+    "id": "notices_updates",
+    "category": "change-management",
+    "prompt": "How does the document say users will be notified about updates, changes, or policy revisions?",
+    "expected_keywords": ["notice", "update", "change", "effective", "notify"]
+  },
+  {
+    "id": "user_obligations",
+    "category": "obligations",
+    "prompt": "What obligations, compliance duties, or account-security responsibilities are imposed on the user or customer?",
+    "expected_keywords": ["must", "responsible", "comply", "account", "security"]
+  }
+]

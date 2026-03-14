@@ -1,0 +1,62 @@
+[
+  {
+    "id": "facebook_v_amalgamated_bank_2024",
+    "title": "Facebook, Inc. v. Amalgamated Bank",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r02_j4ek.pdf",
+    "tags": ["judicial", "supreme-court", "certiorari", "securities"]
+  },
+  {
+    "id": "nvidia_v_e_ohman_2024",
+    "title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r04_5i36.pdf",
+    "tags": ["judicial", "supreme-court", "certiorari", "securities"]
+  },
+  {
+    "id": "andrew_v_white_2025",
+    "title": "Andrew v. White, Warden",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r08_db8e.pdf",
+    "tags": ["judicial", "supreme-court", "habeas", "criminal"]
+  },
+  {
+    "id": "glossip_v_oklahoma_2025",
+    "title": "Glossip v. Oklahoma",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r13_c0n2.pdf",
+    "tags": ["judicial", "supreme-court", "criminal", "postconviction"]
+  },
+  {
+    "id": "san_francisco_v_epa_2025",
+    "title": "City and County of San Francisco v. EPA",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r16_o759.pdf",
+    "tags": ["judicial", "supreme-court", "administrative", "environment"]
+  },
+  {
+    "id": "united_states_v_miller_2025",
+    "title": "United States v. Miller",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us2r21_6kh7.pdf",
+    "tags": ["judicial", "supreme-court", "criminal", "federal"]
+  },
+  {
+    "id": "tiktok_v_garland_2025",
+    "title": "TikTok Inc. v. Garland",
+    "url": "https://www.supremecourt.gov/opinions/24pdf/604us1r07_k536.pdf",
+    "tags": ["judicial", "supreme-court", "constitutional", "national-security"]
+  },
+  {
+    "id": "howell_v_circuit_court_of_indiana_2026",
+    "title": "Howell v. Circuit Court of Indiana",
+    "url": "https://www.supremecourt.gov/opinions/25pdf/25-5557_n6io.pdf",
+    "tags": ["judicial", "supreme-court", "order-related", "certiorari", "ifp"]
+  },
+  {
+    "id": "trotter_v_florida_2026",
+    "title": "Trotter v. Florida",
+    "url": "https://www.supremecourt.gov/opinions/25pdf/25a926_2dp3.pdf",
+    "tags": ["judicial", "supreme-court", "order-related", "death-penalty", "certiorari"]
+  },
+  {
+    "id": "humphreys_v_emmons_2025",
+    "title": "Humphreys v. Emmons",
+    "url": "https://www.supremecourt.gov/opinions/25pdf/24-826_10n2.pdf",
+    "tags": ["judicial", "supreme-court", "order-related", "civil-rights"]
+  }
+]

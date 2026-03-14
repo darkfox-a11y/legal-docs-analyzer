@@ -1,0 +1,74 @@
+[
+  {
+    "id": "openai_terms",
+    "title": "OpenAI Terms of Use",
+    "url": "https://openai.com/policies/terms-of-use/",
+    "tags": ["terms", "ai", "saas"]
+  },
+  {
+    "id": "openai_service_terms",
+    "title": "OpenAI Service Terms",
+    "url": "https://openai.com/policies/service-terms/",
+    "tags": ["service-terms", "ai", "saas"]
+  },
+  {
+    "id": "openai_privacy",
+    "title": "OpenAI Privacy Policy",
+    "url": "https://openai.com/policies/privacy-policy/",
+    "tags": ["privacy", "data-protection", "ai"]
+  },
+  {
+    "id": "google_terms",
+    "title": "Google Terms of Service",
+    "url": "https://policies.google.com/terms",
+    "tags": ["terms", "consumer", "platform"]
+  },
+  {
+    "id": "google_privacy",
+    "title": "Google Privacy Policy",
+    "url": "https://policies.google.com/privacy",
+    "tags": ["privacy", "consumer", "platform"]
+  },
+  {
+    "id": "anthropic_consumer_terms",
+    "title": "Anthropic Consumer Terms",
+    "url": "https://www.anthropic.com/legal/consumer-terms",
+    "tags": ["terms", "ai", "consumer"]
+  },
+  {
+    "id": "anthropic_commercial_terms",
+    "title": "Anthropic Commercial Terms",
+    "url": "https://www.anthropic.com/legal/commercial-terms",
+    "tags": ["terms", "ai", "commercial"]
+  },
+  {
+    "id": "anthropic_privacy",
+    "title": "Anthropic Privacy Policy",
+    "url": "https://www.anthropic.com/legal/privacy",
+    "tags": ["privacy", "ai", "data-protection"]
+  },
+  {
+    "id": "github_terms",
+    "title": "GitHub Terms of Service",
+    "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+    "tags": ["terms", "developer-tools", "platform"]
+  },
+  {
+    "id": "github_privacy",
+    "title": "GitHub General Privacy Statement",
+    "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+    "tags": ["privacy", "developer-tools", "platform"]
+  },
+  {
+    "id": "cloudflare_terms",
+    "title": "Cloudflare Self-Serve Subscription Agreement",
+    "url": "https://www.cloudflare.com/service-specific-terms-application-services/",
+    "tags": ["subscription", "saas", "liability"]
+  },
+  {
+    "id": "slack_terms",
+    "title": "Slack Terms of Service",
+    "url": "https://slack.com/terms-of-service",
+    "tags": ["terms", "saas", "workspace"]
+  }
+]

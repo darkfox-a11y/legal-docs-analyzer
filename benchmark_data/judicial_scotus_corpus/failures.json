@@ -1,0 +1,52 @@
+[
+  {
+    "id": "facebook_v_amalgamated_bank_2024",
+    "title": "Facebook, Inc. v. Amalgamated Bank",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "nvidia_v_e_ohman_2024",
+    "title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "andrew_v_white_2025",
+    "title": "Andrew v. White, Warden",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "glossip_v_oklahoma_2025",
+    "title": "Glossip v. Oklahoma",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "san_francisco_v_epa_2025",
+    "title": "City and County of San Francisco v. EPA",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "united_states_v_miller_2025",
+    "title": "United States v. Miller",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "tiktok_v_garland_2025",
+    "title": "TikTok Inc. v. Garland",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "howell_v_circuit_court_of_indiana_2026",
+    "title": "Howell v. Circuit Court of Indiana",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "trotter_v_florida_2026",
+    "title": "Trotter v. Florida",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  },
+  {
+    "id": "humphreys_v_emmons_2025",
+    "title": "Humphreys v. Emmons",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)>"
+  }
+]

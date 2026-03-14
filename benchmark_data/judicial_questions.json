@@ -1,0 +1,32 @@
+[
+  {
+    "id": "case_identity",
+    "category": "case-metadata",
+    "prompt": "What is the full case name or caption of this judicial document?",
+    "expected_keywords": ["v.", "case", "caption", "petitioner", "respondent"]
+  },
+  {
+    "id": "procedural_posture",
+    "category": "procedure",
+    "prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+    "expected_keywords": ["appeal", "certiorari", "habeas", "remand", "application"]
+  },
+  {
+    "id": "legal_issue",
+    "category": "legal-issue",
+    "prompt": "What central legal issue or question is the court addressing?",
+    "expected_keywords": ["issue", "question", "whether", "court", "law"]
+  },
+  {
+    "id": "holding_or_disposition",
+    "category": "outcome",
+    "prompt": "What holding, ruling, or disposition did the court reach?",
+    "expected_keywords": ["held", "affirmed", "reversed", "vacated", "denied"]
+  },
+  {
+    "id": "relief_and_next_steps",
+    "category": "remedy",
+    "prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+    "expected_keywords": ["granted", "denied", "remanded", "application", "relief"]
+  }
+]

@@ -8,9 +8,10 @@ This is where the magic happens! 🪄
 4. Gemini generates intelligent answer!
 """
 
-import google.generativeai as genai
-from typing import List, Dict
 import logging
+from typing import Dict
+
+import google.generativeai as genai
 
 from app.config import settings
 from app.rag.vector_store import search_similar_chunks
@@ -18,27 +19,180 @@ from app.rag.evaluation import evaluate_rag_pipeline
 
 logger = logging.getLogger(__name__)
 
-# Configure Gemini API
-print("🤖 Configuring Gemini API...")
+DEFAULT_GEMINI_MODEL = "gemini-2.0-flash"
+
+
+# Configure Gemini API once at import time.
 genai.configure(api_key=settings.gemini_api_key)
-model = genai.GenerativeModel('gemini-2.0-flash')
-print("✅ Gemini API ready!")
+
+
+def get_gemini_model(model_name: str = DEFAULT_GEMINI_MODEL) -> genai.GenerativeModel:
+    """Create a Gemini model client for the requested model."""
+    return genai.GenerativeModel(model_name)
+
+
+def classify_question_type(query: str) -> str:
+    """Classify a question so we can use a tighter prompt."""
+    normalized = query.lower()
+    if any(
+        phrase in normalized
+        for phrase in [
+            "main legal issue",
+            "legal issue",
+            "procedural posture",
+            "holding",
+            "disposition",
+            "relief",
+            "remand",
+            "analysis",
+            "analyze",
+            "implication",
+        ]
+    ):
+        return "analytical"
+    if any(
+        phrase in normalized
+        for phrase in ["parties involved", "orders", "decisions", "extract", "case name", "caption"]
+    ):
+        return "extraction"
+    return "factual"
+
+
+def normalize_document_type(document_type: str | None) -> str:
+    """Normalize document type labels into stable answer modes."""
+    normalized = (document_type or "general").lower().strip()
+    if normalized in {"legal", "judicial", "court", "judgment", "order"}:
+        return "judicial"
+    if normalized in {"contract", "policy", "report"}:
+        return normalized
+    return "general"
+
+
+def build_prompt(
+    query: str,
+    context: str,
+    question_type: str,
+    detail_level: str,
+    document_type: str,
+) -> str:
+    """Build a concise prompt tuned to question type."""
+    brevity_instruction = {
+        "brief": "Keep the answer to 1-2 short sentences.",
+        "detailed": "Keep the answer to 2-3 concise sentences.",
+        "comprehensive": "Keep the answer to one short paragraph with only the most relevant details.",
+    }.get(detail_level, "Keep the answer concise.")
+
+    if document_type == "judicial":
+        return f"""You are analyzing a court decision or judicial order.
+
+Answer using only the provided excerpts.
+Prefer exact case-specific information over general legal explanation.
+If the excerpts show the caption, procedural posture, holding, disposition, or relief, state those directly.
+If the excerpts are incomplete, say what is supported by the text and do not use outside knowledge.
+{brevity_instruction}
+
+Question:
+{query}
+
+Relevant excerpts:
+{context}
+
+Answer:"""
+
+    if question_type == "analytical":
+        return f"""You are a legal document analysis expert.
+
+Answer the question using only the provided excerpts.
+Give a brief analysis grounded in the text, and be direct when the context is clear.
+Only express uncertainty when the excerpts are genuinely ambiguous.
+{brevity_instruction}
+
+Question:
+{query}
+
+Relevant excerpts:
+{context}
+
+Answer:"""
+
+    return f"""You are a legal document analysis expert.
+
+Answer the question directly using only the provided excerpts.
+Be confident when the excerpts support a clear answer.
+If possible, cite the relevant excerpt number.
+Only express uncertainty when the text is genuinely ambiguous.
+{brevity_instruction}
+
+Question:
+{query}
+
+Relevant excerpts:
+{context}
+
+Answer:"""
+
+
+def infer_confidence(answer: str, question_type: str, search_results: list[dict]) -> str:
+    """Infer a confidence label from answer language and retrieval quality."""
+    answer_lower = answer.lower()
+    uncertainty_markers = [
+        "cannot determine",
+        "unclear",
+        "insufficient information",
+        "not possible to determine",
+        "not enough information",
+    ]
+    explicit_markers = [
+        "explicitly states",
+        "clearly indicates",
+        "according to",
+        "directly mentions",
+        "excerpt",
+    ]
+    inference_markers = [
+        "infer",
+        "suggest",
+        "might be",
+        "could be",
+        "possibly",
+        "likely",
+        "reasonably conclude",
+    ]
+
+    if any(marker in answer_lower for marker in uncertainty_markers):
+        return "low"
+    if any(marker in answer_lower for marker in explicit_markers):
+        return "high"
+    if any(marker in answer_lower for marker in inference_markers):
+        return "medium"
+
+    top_score = search_results[0]["score"] if search_results else 0.0
+    if question_type in {"factual", "extraction"} and top_score >= 0.75:
+        return "high"
+    return "medium"
 
 
 def answer_query(
     query: str,  
     document_id: int = None, 
     top_k: int = 5,
-    detail_level: str = "detailed"
+    detail_level: str = "detailed",
+    model_name: str = DEFAULT_GEMINI_MODEL,
+    collection_name: str = None,
+    document_type: str | None = None,
 ) -> dict:
     """
     Answer a query using RAG with intelligent reasoning and inference
     """
+    prompt_document_type = normalize_document_type(document_type)
+    effective_top_k = max(top_k, 5) if prompt_document_type == "judicial" else top_k
+
     # Search for relevant chunks (use imported function)
     search_results = search_similar_chunks(  
         query=query,
-        top_k=top_k,
-        document_id=document_id
+        top_k=effective_top_k,
+        document_id=document_id,
+        collection_name=collection_name,
     )
     
     if not search_results:
@@ -47,7 +201,10 @@ def answer_query(
             "context": [],
             "sources": [],
             "confidence": "none",
-            "detail_level": detail_level
+            "detail_level": detail_level,
+            "model_name": model_name,
+            "document_type": prompt_document_type,
+            "top_k_used": effective_top_k,
         }
     
     # Build context
@@ -57,70 +214,18 @@ def answer_query(
     
     context = "\n".join(context_parts)
     
-    # Enhanced prompt with reasoning capabilities
-    prompt = f"""You are an expert legal document analyzer with strong analytical and reasoning abilities. Your task is to provide comprehensive, intelligent answers based on document excerpts.
-
-**USER QUESTION:**
-{query}
-
-**RELEVANT DOCUMENT EXCERPTS:**
-{context}
-
-**YOUR TASK:**
-Provide a detailed, helpful answer following these guidelines:
-
-**1. DIRECT INFORMATION:**
-   - If the answer is explicitly stated in the excerpts, provide it directly
-   - Quote specific phrases using quotation marks
-
-**2. INFERENCE & REASONING:**
-   - If the exact answer isn't stated, use logical reasoning based on the available information
-   - Make reasonable inferences from the context provided
-   - Explain your reasoning process clearly
-   - Use phrases like "Based on the information provided..." or "From the context, we can infer..."
-
-**3. COMPARATIVE ANALYSIS:**
-   - If the question asks about alternatives or comparisons, analyze what IS stated
-   - Draw logical conclusions from the available data
-   - Provide context for understanding the implications
-
-**4. HANDLING INCOMPLETE INFORMATION:**
-   - If information is partially available, explain what you know and what's reasonable to conclude
-   - Don't just say "I can't answer" - instead, provide what insights you CAN offer
-   - Suggest what additional information would be needed for a complete answer
-
-**5. RESPONSE STRUCTURE:**
-   - Start with the most direct answer you can provide
-   - Follow with supporting details and reasoning
-   - If making inferences, clearly indicate this
-   - End with any relevant caveats or additional context
-
-**EXAMPLE APPROACH:**
-Instead of: "The excerpts don't mention X, so I can't answer."
-Better: "While the excerpts don't explicitly state X, based on the information provided about Y and Z, we can reasonably infer that... [explanation]. This suggests that..."
-
-**IMPORTANT RULES:**
-✓ Use logical reasoning and inference when direct answers aren't available
-✓ Be helpful and provide actionable insights
-✓ Always distinguish between explicit statements and inferences
-✓ Base all reasoning on information in the excerpts
-✓ Be professional and thorough
-✗ Don't make wild guesses unconnected to the document
-✗ Don't refuse to answer if you can provide useful context
-✗ Don't invent facts not supported by the excerpts
-
-**YOUR DETAILED ANSWER:**"""
+    question_type = classify_question_type(query)
+    prompt = build_prompt(query, context, question_type, detail_level, prompt_document_type)
     
     try:
-        # Create model instance here
-        gemini_model = genai.GenerativeModel('gemini-2.0-flash-exp')
+        gemini_model = get_gemini_model(model_name)
         
         # Configure for better reasoning
         generation_config = genai.types.GenerationConfig(
-            temperature=0.4,
-            max_output_tokens=1500,
-            top_p=0.95,
-            top_k=40
+            temperature=0.1,
+            max_output_tokens=300,
+            top_p=0.8,
+            top_k=20
         )
         
         response = gemini_model.generate_content(
@@ -129,22 +234,7 @@ Better: "While the excerpts don't explicitly state X, based on the information p
         )
         answer = response.text
         
-        # Determine confidence level
-        answer_lower = answer.lower()
-        if any(phrase in answer_lower for phrase in [
-            "explicitly states", "clearly indicates", "according to", "directly mentions"
-        ]):
-            confidence = "high"
-        elif any(phrase in answer_lower for phrase in [
-            "infer", "suggest", "might be", "could be", "possibly", "likely", "reasonably conclude"
-        ]):
-            confidence = "medium"
-        elif any(phrase in answer_lower for phrase in [
-            "cannot determine", "unclear", "insufficient information"
-        ]):
-            confidence = "low"
-        else:
-            confidence = "medium"
+        confidence = infer_confidence(answer, question_type, search_results)
             
     except Exception as e:
         logger.error(f"❌ Error generating answer: {e}")
@@ -153,7 +243,10 @@ Better: "While the excerpts don't explicitly state X, based on the information p
             "context": context_parts,
             "sources": search_results,
             "confidence": "error",
-            "detail_level": detail_level
+            "detail_level": detail_level,
+            "model_name": model_name,
+            "document_type": prompt_document_type,
+            "top_k_used": effective_top_k,
         }
     
     # Prepare result
@@ -169,7 +262,10 @@ Better: "While the excerpts don't explicitly state X, based on the information p
             for src in search_results
         ],
         "confidence": confidence,
-        "detail_level": detail_level
+        "detail_level": detail_level,
+        "model_name": model_name,
+        "document_type": prompt_document_type,
+        "top_k_used": effective_top_k,
     }
     
     # Add evaluation metrics (optional, can be toggled)
@@ -191,7 +287,12 @@ Better: "While the excerpts don't explicitly state X, based on the information p
     
     return result
 
-def summarize_document(document_id: int, max_chunks: int = 10) -> Dict:
+def summarize_document(
+    document_id: int,
+    max_chunks: int = 10,
+    model_name: str = DEFAULT_GEMINI_MODEL,
+    collection_name: str = None,
+) -> Dict:
     """
     Generate a summary of the entire document.
     
@@ -209,7 +310,8 @@ def summarize_document(document_id: int, max_chunks: int = 10) -> Dict:
     chunks = search_similar_chunks(
         query="main points key information important details",
         document_id=document_id,
-        top_k=max_chunks
+        top_k=max_chunks,
+        collection_name=collection_name,
     )
     
     if not chunks:
@@ -238,13 +340,14 @@ Please provide:
     
     # Get response from Gemini
     try:
-        response = model.generate_content(prompt)
+        response = get_gemini_model(model_name).generate_content(prompt)
         result = response.text
         
         return {
             "document_id": document_id,
             "summary": result,
-            "chunks_analyzed": len(chunks)
+            "chunks_analyzed": len(chunks),
+            "model_name": model_name,
         }
         
     except Exception as e:

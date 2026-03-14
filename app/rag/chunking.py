@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 def semantic_chunk_with_overlap(
     text: str,
-    chunk_size: int = 500,
-    overlap_size: int = 100,
+    chunk_size: int = 300,
+    overlap_size: int = 50,
     min_chunk_size: int = 50
 ) -> List[str]:
     """
@@ -223,8 +223,8 @@ def hierarchical_chunking(
 def smart_chunking(
     text: str,
     document_type: str = "general",
-    chunk_size: int = 500,
-    overlap_size: int = 100
+    chunk_size: int = 300,
+    overlap_size: int = 50
 ) -> List[str]:
     """
     Automatically choose best chunking strategy based on document type.
@@ -270,17 +270,19 @@ def smart_chunking(
         for section, content in hierarchical:
             chunk_text = f"[{section}]\n{content}"
             chunks.append(chunk_text)
-        
-        return chunks
-    
-    else:
-        # Use semantic chunking with overlap for other documents
-        logger.info(f"Using semantic chunking with overlap (chunk_size={chunk_size}, overlap={overlap_size})")
-        return semantic_chunk_with_overlap(
-            text,
-            chunk_size=chunk_size,
-            overlap_size=overlap_size
-        )
+
+        if chunks:
+            return chunks
+
+        logger.warning("Hierarchical chunking produced no chunks, falling back to semantic chunking")
+
+    # Use semantic chunking with overlap for other documents or as a fallback.
+    logger.info(f"Using semantic chunking with overlap (chunk_size={chunk_size}, overlap={overlap_size})")
+    return semantic_chunk_with_overlap(
+        text,
+        chunk_size=chunk_size,
+        overlap_size=overlap_size
+    )
 
 
 # Backward compatibility - keep old function name
@@ -290,7 +292,7 @@ def simple_chunk_by_sentences(text: str, sentences_per_chunk: int = 5) -> List[s
     Use smart_chunking() or semantic_chunk_with_overlap() instead
     """
     logger.warning("simple_chunk_by_sentences is deprecated, use smart_chunking instead")
-    return semantic_chunk_with_overlap(text, chunk_size=500, overlap_size=100)
+    return semantic_chunk_with_overlap(text, chunk_size=300, overlap_size=50)
 
 
 # Test when run directly

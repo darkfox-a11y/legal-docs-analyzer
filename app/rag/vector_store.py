@@ -101,6 +101,10 @@ def store_document_chunks(
     # Ensure collection exists
     create_collection_if_not_exists(collection_name)
     
+    if not chunks or not embeddings:
+        logger.warning("No chunks to store for document %s", document_id)
+        return 0
+
     logger.info(f"📝 Storing {len(chunks)} chunks for document {document_id}")
     
     # Prepare points (Qdrant's term for vectors with metadata)

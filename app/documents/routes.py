@@ -197,8 +197,8 @@ async def upload_document(
             chunks = smart_chunking(
                 document.extracted_text,
                 document_type=doc_type,
-                chunk_size=500,      # ~100-150 words per chunk
-                overlap_size=100     # 20% overlap to preserve context
+                chunk_size=300,      # Smaller chunks reduce embedding and retrieval overhead
+                overlap_size=50      # Lighter overlap preserves context with less duplication
             )
             
             if not chunks:
@@ -338,8 +338,9 @@ async def delete_document(
 async def ask_question(
     question: str,
     document_id: int,
-    top_k: int = 5,
+    top_k: int = 3,
     detail_level: str = "detailed",
+    model_name: str | None = None,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -416,11 +417,14 @@ async def ask_question(
     
     # Get answer using advanced RAG
     try:
+        document_type = detect_document_type(document.extracted_text or "", document.file_type)
         result = answer_query(
             query=question,
             document_id=document_id,
             top_k=top_k,
-            detail_level=detail_level
+            detail_level=detail_level,
+            model_name=model_name or "gemini-2.0-flash",
+            document_type=document_type,
         )
         
         logger.info(f"✅ Generated answer with confidence: {result.get('confidence', 'unknown')}")

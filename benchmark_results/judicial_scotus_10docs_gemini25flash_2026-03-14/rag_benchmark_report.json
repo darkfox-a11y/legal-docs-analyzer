@@ -1,0 +1,1670 @@
+{
+  "total_cases": 50,
+  "models": [
+    {
+      "model_name": "gemini-2.5-flash",
+      "cases": 50,
+      "avg_latency_ms": 3085.29,
+      "avg_composite_score": 0.4165,
+      "avg_retrieval_score": 0.4003,
+      "avg_retrieval_keyword_hit_rate": 0.152,
+      "avg_groundedness": 0.2081,
+      "avg_answer_keyword_coverage": 0.3,
+      "avg_question_alignment": 0.442,
+      "generic_answer_rate": 0.0,
+      "avg_judge_score": 2.58
+    }
+  ],
+  "results": [
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "facebook_v_amalgamated_bank_2024",
+      "document_title": "Facebook, Inc. v. Amalgamated Bank",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2892.45,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.43495,
+        "max_score": 0.4543,
+        "min_score": 0.4156,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 24,
+        "groundedness": 0.2857142857142857,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is perfectly grounded, completely and accurately extracting the full case name directly from the provided context. It correctly identifies and references the relevant excerpt. The answer is clear, concise, and free of any hallucinations. While the question required direct extraction rather than complex legal reasoning, the answer correctly identified the legal term 'case name' or 'caption' from the document."
+      },
+      "composite_score": 0.6035
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "facebook_v_amalgamated_bank_2024",
+      "document_title": "Facebook, Inc. v. Amalgamated Bank",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 2865.82,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.14025,
+        "max_score": 0.1912,
+        "min_score": 0.0893,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 38,
+        "groundedness": 0.11764705882352941,
+        "question_alignment": 0.36363636363636365,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 4,
+        "legal_reasoning_score": 5,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer correctly identifies the procedural posture as a 'petition for a writ of certiorari' based on the 'on petit...' fragment and the Supreme Court context, demonstrating strong legal reasoning. However, it hallucinates specific details about the 'United States Court of Appeals for the Ninth Circuit' and that the 'Supreme Court dismissed the writ of certiorari as improvidently granted,' which are not present in the provided context. This significantly reduces its groundedness and increases the hallucination risk."
+      },
+      "composite_score": 0.3951
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "facebook_v_amalgamated_bank_2024",
+      "document_title": "Facebook, Inc. v. Amalgamated Bank",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3694.92,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.4213,
+        "max_score": 0.4527,
+        "min_score": 0.3899,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 11,
+        "groundedness": 0.0,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is excellent. It correctly and clearly states that the provided excerpts do not contain the information needed to answer the question, demonstrating perfect groundedness, completeness, clarity, and no hallucination risk. While it doesn't *perform* legal reasoning, it correctly assesses the context's lack of legal content for the specific query."
+      },
+      "composite_score": 0.4283
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "facebook_v_amalgamated_bank_2024",
+      "document_title": "Facebook, Inc. v. Amalgamated Bank",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2774.49,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.47,
+        "max_score": 0.4793,
+        "min_score": 0.4607,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 28,
+        "groundedness": 0.42857142857142855,
+        "question_alignment": 0.4,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 3,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer is exceptionally clear, concise, and uses appropriate legal terminology for a court's disposition. However, it suffers from a severe hallucination issue: the entire holding and ruling ('dismissed the writ of certiorari,' 'improvidently granted') is completely absent from the provided context. The context only identifies the case name, not its outcome. Therefore, the answer is not grounded and completely hallucinates the critical information needed to answer the question, despite its excellent clarity and legal formulation."
+      },
+      "composite_score": 0.4009
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "facebook_v_amalgamated_bank_2024",
+      "document_title": "Facebook, Inc. v. Amalgamated Bank",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3280.67,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.3912,
+        "max_score": 0.4566,
+        "min_score": 0.3258,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 31,
+        "groundedness": 0.05555555555555555,
+        "question_alignment": 0.625,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 2,
+        "legal_reasoning_score": 2,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is clearly written and directly addresses the question, outlining the relief granted (dismissal of certiorari as improvidently granted) and the absence of further court directions. However, the critical flaw is that the answer attributes this information to 'Excerpt 1', which is the provided context, but this specific detail ('The writ of certiorari was dismissed as improvidently granted') is *not present* in the retrieved context. The context only shows the case name and page headers. This constitutes a significant hallucination regarding the source of the information, severely impacting its groundedness and increasing hallucination risk."
+      },
+      "composite_score": 0.3661
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "nvidia_v_e_ohman_2024",
+      "document_title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 3139.35,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.4929,
+        "max_score": 0.5671,
+        "min_score": 0.4187,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 9,
+        "groundedness": 0.3333333333333333,
+        "question_alignment": 0.6666666666666666,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer correctly identifies a portion of the case name ('NVIDIA CORP') which is present in the context. However, it fails to extract the *full* case name or caption, omitting the 'etal.', 'v.', and the entire respondent's name ('E. OHMAN J:OR FONDER AB etal.'). This makes the answer severely incomplete, although what is provided is grounded and clear. There is no hallucinated content, only significant omission."
+      },
+      "composite_score": 0.484
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "nvidia_v_e_ohman_2024",
+      "document_title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3313.79,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.20435,
+        "max_score": 0.2225,
+        "min_score": 0.1862,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 47,
+        "groundedness": 0.1,
+        "question_alignment": 0.36363636363636365,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer provides a clear and specific procedural posture (certiorari) and outcome (dismissed as improvidently granted), using correct legal terminology. However, it is completely ungrounded in the provided context. None of the information about 'certiorari,' the 'Ninth Circuit,' or the 'dismissal as improvidently granted' is present in the retrieved context. The context only gives the case name, parties, and confirms it's a Supreme Court case, but no procedural details. This indicates a high risk of hallucination."
+      },
+      "composite_score": 0.3596
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "nvidia_v_e_ohman_2024",
+      "document_title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3584.16,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.49475,
+        "max_score": 0.4992,
+        "min_score": 0.4903,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 11,
+        "groundedness": 0.3333333333333333,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 3,
+        "clarity_score": 2,
+        "hallucination_risk_score": 4,
+        "summary": "The answer correctly identifies the court as 'The Supreme Court' which is grounded in the context. It also uses appropriate legal phrasing ('procedural question of whether to') demonstrating some understanding of legal issue framing. However, the answer is severely incomplete, cutting off mid-sentence and failing to state the actual legal issue or question. Crucially, the provided retrieved context itself does not contain the specific legal issue, making it impossible for the answer to be fully grounded on the core request. The lack of a complete answer significantly impacts completeness and overall clarity. Hallucination risk is low as it does not invent information."
+      },
+      "composite_score": 0.4869
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "nvidia_v_e_ohman_2024",
+      "document_title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2889.83,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.52005,
+        "max_score": 0.5281,
+        "min_score": 0.512,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 35,
+        "groundedness": 0.1,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 5,
+        "legal_reasoning_score": 5,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer provides a highly accurate and legally sound disposition of the case, using correct terminology and offering a clear explanation. It fully addresses the question. However, the critical flaw is that the entire disposition ('dismissed the writ of certiorari as improvidently granted') is completely absent from the *provided retrieved context*. Although the information itself is factually correct (the Supreme Court did dismiss this case as improvidently granted), for a RAG system, generating information not present in the provided context is a severe failure in grounding and represents a high hallucination risk. The answer attributes the information to '(Excerpt 1)' but the supplied excerpts do not contain it."
+      },
+      "composite_score": 0.3434
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "nvidia_v_e_ohman_2024",
+      "document_title": "NVIDIA Corp. v. E. Ohman J:or Fonder AB",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 2824.62,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 2,
+        "avg_score": 0.52215,
+        "max_score": 0.5424,
+        "min_score": 0.5019,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 23,
+        "groundedness": 0.18181818181818182,
+        "question_alignment": 0.25,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 3,
+        "hallucination_risk_score": 5,
+        "summary": "The answer directly hallucinates the primary relief granted/denied, falsely attributing it to 'Excerpt 1' which contains no such information. The provided context only includes the case name and citation, not the court's decision. Therefore, the key information is ungrounded. The answer also cuts off mid-sentence, leaving the second part of the question incomplete. This represents a very high hallucination risk and a complete failure to extract relevant information from the provided context."
+      },
+      "composite_score": 0.3343
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "andrew_v_white_2025",
+      "document_title": "Andrew v. White, Warden",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2118.08,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4925333333333333,
+        "max_score": 0.5065,
+        "min_score": 0.4754,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 24,
+        "groundedness": 0.09090909090909091,
+        "question_alignment": 0.6666666666666666,
+        "keyword_coverage": 0.8,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 3,
+        "hallucination_risk_score": 5,
+        "summary": "The answer completely hallucinates the case name and parties ('ANDREW v. WHITE, WARDEN', 'Brenda Andrew', 'Warden White'). This information is not present anywhere in the retrieved context. The context primarily contains publication boilerplate and citations to other cases, but no caption for the document itself. The answer is ungrounded and poses a severe hallucination risk, failing to correctly identify that the requested information is absent from the provided text."
+      },
+      "composite_score": 0.4942
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "andrew_v_white_2025",
+      "document_title": "Andrew v. White, Warden",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3064.6,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.2473,
+        "max_score": 0.2563,
+        "min_score": 0.2368,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 32,
+        "groundedness": 0.25,
+        "question_alignment": 0.45454545454545453,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 3,
+        "completeness_score": 4,
+        "legal_reasoning_score": 5,
+        "clarity_score": 5,
+        "hallucination_risk_score": 2,
+        "summary": "The answer accurately identifies the procedural posture as federal habeas review under the Antiterrorism and Effective Death Penalty Act (AEDPA), which is well-supported by the retrieved context. The legal reasoning is sound, and the answer is clear and concise. However, the answer hallucinates the specific citation \"28 U. S. C. \u00a72,\" as this detail is not present in the provided context, significantly reducing its groundedness and increasing the hallucination risk."
+      },
+      "composite_score": 0.4414
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "andrew_v_white_2025",
+      "document_title": "Andrew v. White, Warden",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3377.39,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.5228666666666667,
+        "max_score": 0.5555,
+        "min_score": 0.5061,
+        "keyword_hit_rate": 1.0
+      },
+      "answer": {
+        "word_count": 11,
+        "groundedness": 0.5,
+        "question_alignment": 0.8333333333333334,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 1,
+        "hallucination_risk_score": 4,
+        "summary": "The answer correctly identifies the structural start of a legal issue statement with 'whether the', which is partially grounded in the context's use of 'considered whether'. However, the answer is severely incomplete, failing to articulate the actual legal issue, thus scoring very low on completeness, legal reasoning, and clarity. While the provided fragment itself does not contain hallucinatory information, its incompleteness makes it entirely unhelpful in answering the question."
+      },
+      "composite_score": 0.6605
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "andrew_v_white_2025",
+      "document_title": "Andrew v. White, Warden",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2717.3,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.5457,
+        "max_score": 0.5545,
+        "min_score": 0.5354,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 35,
+        "groundedness": 0.7368421052631579,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer is excellent. It directly and completely extracts the court's holding, ruling, and disposition from the provided context, using the exact legal terms. It accurately identifies that the court granted the petition and motion, vacated the judgment, and remanded the case. There is no hallucination, and the answer is exceptionally clear and concise. While it doesn't demonstrate complex legal reasoning, it accurately identifies and states the legal actions taken by the court, which is appropriate for this type of question."
+      },
+      "composite_score": 0.5074
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "andrew_v_white_2025",
+      "document_title": "Andrew v. White, Warden",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3583.11,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.6187666666666667,
+        "max_score": 0.6487,
+        "min_score": 0.5761,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.25,
+        "question_alignment": 0.0,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer correctly identifies that the excerpts appear to be from a dissenting opinion, a fact that is directly supported by the 'Thomas, J., dissenting' mention in the retrieved context. However, the answer completely fails to address the actual question regarding relief granted or denied, or any next steps, as this information was not present in the provided context."
+      },
+      "composite_score": 0.347
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "glossip_v_oklahoma_2025",
+      "document_title": "Glossip v. Oklahoma",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 3786.95,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.47973333333333334,
+        "max_score": 0.5031,
+        "min_score": 0.4602,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 8,
+        "groundedness": 0.0,
+        "question_alignment": 0.16666666666666666,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 3,
+        "hallucination_risk_score": 5,
+        "summary": "The answer completely hallucinates the case name 'Glossip', which is not present anywhere in the provided retrieved context. The retrieved context itself does not contain the full case name or caption. Therefore, the answer is entirely ungrounded, incomplete, demonstrates no legal reasoning in its fabrication, and exhibits a high risk of hallucination."
+      },
+      "composite_score": 0.3143
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "glossip_v_oklahoma_2025",
+      "document_title": "Glossip v. Oklahoma",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3164.13,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.25453333333333333,
+        "max_score": 0.3133,
+        "min_score": 0.223,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 8,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.2727272727272727,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 1,
+        "hallucination_risk_score": 2,
+        "summary": "The answer is severely lacking. It only identifies 'the Supreme Court' (which can be inferred from the context's citation format and 'This Court'), but completely fails to describe *any* procedural posture. The most relevant piece of information in the context regarding a procedural posture is 'made application of the procedural bar' by the OCCA, which the answer entirely omits. The answer is incomplete, unclear, and demonstrates no legal reasoning in extracting the required information. While 'Supreme Court' is somewhat grounded, the answer risks implying the Supreme Court is the actor for the procedural posture (application of a procedural bar) that the context attributes to a different court (OCCA), thus creating a high risk of misattribution."
+      },
+      "composite_score": 0.3012
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "glossip_v_oklahoma_2025",
+      "document_title": "Glossip v. Oklahoma",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3392.23,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.525,
+        "max_score": 0.5543,
+        "min_score": 0.5092,
+        "keyword_hit_rate": 0.4
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.8333333333333334,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 2,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is a sentence fragment that correctly initiates a response to the question by restating part of the prompt. However, it fails to provide any specific legal issue or information, rendering it entirely incomplete. The retrieved context also does not contain the central legal issue or question the court is addressing, which would have made it impossible for the model to complete the answer accurately without hallucinating. Since the answer is incomplete, it technically contains no hallucinated information, resulting in a low hallucination risk for the current output."
+      },
+      "composite_score": 0.4931
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "glossip_v_oklahoma_2025",
+      "document_title": "Glossip v. Oklahoma",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2995.2,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.5337000000000001,
+        "max_score": 0.5491,
+        "min_score": 0.523,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 7,
+        "groundedness": 0.25,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is clear and uses appropriate legal terminology to describe a court's action. However, it is completely ungrounded in the provided context, which does not contain the information that the Court 'reversed the prior judgment'. This constitutes a significant hallucination, leading to high hallucination risk and low groundedness and completeness scores. The context only vaguely refers to 'disposition' or 'remedy' in general terms, not a specific action taken by the court in this case."
+      },
+      "composite_score": 0.3548
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "glossip_v_oklahoma_2025",
+      "document_title": "Glossip v. Oklahoma",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3324.98,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.5301,
+        "max_score": 0.5339,
+        "min_score": 0.5255,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.3333333333333333,
+        "question_alignment": 0.125,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 2,
+        "hallucination_risk_score": 1,
+        "summary": "The answer is extremely poor. It fails to address any part of the question regarding relief granted/denied or next steps, and is cut off mid-sentence, rendering it incomplete and unhelpful. The assertion of a 'Napue violation' is not present in the provided retrieved context, indicating a direct hallucination. While 'Glossip' is mentioned in the context, the core legal finding is ungrounded, and the answer provides no relevant legal reasoning."
+      },
+      "composite_score": 0.3254
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "san_francisco_v_epa_2025",
+      "document_title": "City and County of San Francisco v. EPA",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2823.57,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.43083333333333335,
+        "max_score": 0.4981,
+        "min_score": 0.3539,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 43,
+        "groundedness": 0.2777777777777778,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer accurately identifies the full case name directly from the provided context. It fully addresses the question, clearly states the information, and correctly attributes its sources from the retrieved context. There is no hallucination and a strong understanding of what constitutes a case caption is demonstrated."
+      },
+      "composite_score": 0.6021
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "san_francisco_v_epa_2025",
+      "document_title": "City and County of San Francisco v. EPA",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3311.66,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.17556666666666668,
+        "max_score": 0.2138,
+        "min_score": 0.1298,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 11,
+        "groundedness": 0.14285714285714285,
+        "question_alignment": 0.0,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 3,
+        "hallucination_risk_score": 5,
+        "summary": "The answer correctly identifies that the case is before the Supreme Court, which is strongly supported by mentions of 'Opinion of the Court,' 'Syllabus,' a dissent from 'Barrett, J.,' and a U.S. Reporter citation. This demonstrates good grounding and avoids hallucination for the stated fact. However, the answer completely fails to address the core question about the *procedural posture* (such as appeal, certiorari, habeas, or remand). It stops mid-sentence and doesn't provide any specific procedural term, making it highly incomplete. While the legal reasoning correctly identifies the forum, it does not extend to inferring the specific procedural posture from the nature of the documents (e.g., a Supreme Court opinion and dissent strongly imply a review process like certiorari or appeal)."
+      },
+      "composite_score": 0.2411
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "san_francisco_v_epa_2025",
+      "document_title": "City and County of San Francisco v. EPA",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3231.1,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.3963,
+        "max_score": 0.4085,
+        "min_score": 0.3889,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 27,
+        "groundedness": 0.10526315789473684,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 2,
+        "legal_reasoning_score": 3,
+        "clarity_score": 3,
+        "hallucination_risk_score": 5,
+        "summary": "The answer attempts to identify a central legal issue using appropriate legal terminology ('whether' question, statutory citation, specific legal concepts like NPDES permits and receiving waters). However, the critical details of the issue, including 'Section 1311(b)(1)(C)', 'NPDES permit requirements', and the specific dispute regarding conditioning compliance on receiving waters, are not present in the provided context snippets. The answer also appears to be truncated. This results in a very low groundedness score and a very high hallucination risk. While the *form* of the legal issue is sound, its content is entirely unverified by the given text. Completeness is low due to truncation and lack of contextual support for a full answer. Clarity is moderately impacted by the truncation."
+      },
+      "composite_score": 0.4134
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "san_francisco_v_epa_2025",
+      "document_title": "City and County of San Francisco v. EPA",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 3409.51,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.37429999999999997,
+        "max_score": 0.3989,
+        "min_score": 0.3579,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 6,
+        "groundedness": 0.75,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 2,
+        "legal_reasoning_score": 2,
+        "clarity_score": 4,
+        "hallucination_risk_score": 4,
+        "summary": "The answer identifies a key subject (Government's interpretation) mentioned in the context and provides a concise disposition ('rejected'). However, the specific action 'rejected' is an inference based on the context's description of the interpretation rather than an explicit statement of the court's holding. The context states 'The Government's interpretation would undo what Congress plainly sought to achieve,' which implies disagreement, but does not explicitly state the court 'rejected' it as a formal holding. The answer is clear, but lacks direct grounding for the stated disposition and likely represents only a partial aspect of the full holding, as suggested by the dissenting opinion's 'holds otherwise' statement."
+      },
+      "composite_score": 0.3844
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "san_francisco_v_epa_2025",
+      "document_title": "City and County of San Francisco v. EPA",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3146.49,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.38273333333333337,
+        "max_score": 0.3865,
+        "min_score": 0.3753,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.0,
+        "question_alignment": 0.125,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer accurately states that the provided excerpts do not contain the information needed to answer the question about relief or court directions. It is perfectly grounded in the provided (and very unhelpful) context, clearly communicates the lack of information, and therefore carries no hallucination risk. While it doesn't provide the requested legal details, this is due to the inadequacy of the retrieved context, not a fault of the answer itself. It demonstrates a correct understanding that the legal outcome information is absent."
+      },
+      "composite_score": 0.3433
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "united_states_v_miller_2025",
+      "document_title": "United States v. Miller",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2856.3,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.42486666666666667,
+        "max_score": 0.4508,
+        "min_score": 0.405,
+        "keyword_hit_rate": 0.4
+      },
+      "answer": {
+        "word_count": 25,
+        "groundedness": 0.25,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is perfectly grounded in the provided context, directly extracting the full case name 'UNITED STATES v. MILLER' which is prominently displayed in multiple excerpts. It fully answers the question, is clear and concise, and poses no hallucination risk. While the question did not require complex legal reasoning, the answer correctly identifies a fundamental component of a legal document."
+      },
+      "composite_score": 0.6257
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "united_states_v_miller_2025",
+      "document_title": "United States v. Miller",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3347.14,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.13726666666666668,
+        "max_score": 0.1393,
+        "min_score": 0.1356,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 8,
+        "groundedness": 0.0,
+        "question_alignment": 0.36363636363636365,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 2,
+        "hallucination_risk_score": 5,
+        "summary": "The answer completely hallucinates the term 'appeal,' as this word and any description of a procedural posture are absent from the provided retrieved context. The answer is also incomplete, cutting off abruptly. The retrieved context itself is entirely unhelpful for answering the question, containing only generic snippets about legal interpretation and case citations without describing any procedural posture."
+      },
+      "composite_score": 0.2613
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "united_states_v_miller_2025",
+      "document_title": "United States v. Miller",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3323.03,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4298,
+        "max_score": 0.4359,
+        "min_score": 0.419,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 12,
+        "groundedness": 0.0,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 2,
+        "legal_reasoning_score": 2,
+        "clarity_score": 2,
+        "hallucination_risk_score": 3,
+        "summary": "The answer attempts to identify the central legal issue, correctly using terms like 'interpretation.' However, it is significantly incomplete ('of the sovereign') and lacks explicit grounding for the term 'sovereign' within the provided text snippets. While 'Section 106(a)' in the context hints at sovereign immunity, the specific term 'sovereign' is not present, indicating a moderate risk of hallucination or unsupported inference. The phrasing is also grammatically awkward and unclear due to its incompleteness."
+      },
+      "composite_score": 0.3799
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "united_states_v_miller_2025",
+      "document_title": "United States v. Miller",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 3277.83,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.41923333333333335,
+        "max_score": 0.4365,
+        "min_score": 0.4032,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 7,
+        "groundedness": 0.5,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 1,
+        "hallucination_risk_score": 3,
+        "summary": "The answer correctly attempts to use the expected legal phrase 'The Court held that...' and references '\u00a7 106(a)', which is present in the context. However, the answer is severely incomplete, cutting off mid-sentence, and therefore provides no actual holding or disposition. The retrieved context itself is fragmented and does not clearly contain a complete holding or disposition for 'UNITED STATES v. MILLER', which contributes to the answer's inability to be complete. While no hallucination is present in the provided snippet, the lack of a complete answer in the context means any full answer would likely require information beyond what was retrieved, posing a high risk for hallucination."
+      },
+      "composite_score": 0.3671
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "united_states_v_miller_2025",
+      "document_title": "United States v. Miller",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3040.04,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4601,
+        "max_score": 0.4671,
+        "min_score": 0.4566,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 34,
+        "groundedness": 0.11764705882352941,
+        "question_alignment": 0.125,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer is entirely ungrounded in the provided context. None of the information about the Tenth Circuit being reversed or the case being remanded is present in any of the retrieved excerpts. The context provided is extremely sparse and does not contain the necessary information to answer the question. The answer, while clearly written, is a complete hallucination, thus scoring very low on groundedness, completeness (as it provides no correct information), legal reasoning (as it fabricates outcomes), and very high on hallucination risk."
+      },
+      "composite_score": 0.3316
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "tiktok_v_garland_2025",
+      "document_title": "TikTok Inc. v. Garland",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 3103.67,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4283,
+        "max_score": 0.4578,
+        "min_score": 0.3918,
+        "keyword_hit_rate": 0.4
+      },
+      "answer": {
+        "word_count": 33,
+        "groundedness": 0.1875,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 5,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer accurately and completely identifies the full case name/caption, 'TIKTOK INC. v. GARLAND,' directly from the header of all provided context excerpts. It is perfectly grounded, clearly stated, and explicitly references its source, demonstrating no risk of hallucination."
+      },
+      "composite_score": 0.6389
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "tiktok_v_garland_2025",
+      "document_title": "TikTok Inc. v. Garland",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3255.81,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.2554,
+        "max_score": 0.2686,
+        "min_score": 0.2438,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 9,
+        "groundedness": 0.0,
+        "question_alignment": 0.36363636363636365,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 4,
+        "legal_reasoning_score": 5,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer correctly identifies 'appeal' as the procedural posture, which is directly and strongly supported by the phrase 'The judgment of the United States Court of Appeals' in the retrieved context. The legal inference is sound, the answer is clear, and there is no hallucination. While the context is brief and doesn't specify the *current* posture of the case before the court issuing the syllabus (likely the Supreme Court reviewing the appeal), 'appeal' accurately describes the described action of the Court of Appeals."
+      },
+      "composite_score": 0.3872
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "tiktok_v_garland_2025",
+      "document_title": "TikTok Inc. v. Garland",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3220.66,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4361,
+        "max_score": 0.4736,
+        "min_score": 0.4095,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.8333333333333334,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 2,
+        "hallucination_risk_score": 4,
+        "summary": "The answer correctly sets up the structure for identifying a legal issue (using 'whether'), but it is severely incomplete, failing to state the actual legal issue or question. The retrieved context does not provide the central legal issue in a clear, formulated manner, offering only fragments about 'speaker distinctions' and 'differential treatment' from a syllabus. Therefore, the answer is ungrounded in its substance and completely fails to address the question asked, despite having the correct format. There's a low hallucination risk for the text provided, as it doesn't invent information, but rather omits the core answer."
+      },
+      "composite_score": 0.4927
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "tiktok_v_garland_2025",
+      "document_title": "TikTok Inc. v. Garland",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2658.34,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.42286666666666667,
+        "max_score": 0.4512,
+        "min_score": 0.4068,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 26,
+        "groundedness": 0.6363636363636364,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 4,
+        "legal_reasoning_score": 4,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer provides a clear and concise statement of a court's disposition, using appropriate legal terminology and directly addressing the question. The clarity is excellent. However, its primary weakness is a lack of direct grounding in the provided context. The crucial term 'affirmed' and the concluding phrase 'It is so ordered' are not explicitly found in the retrieved snippets, making them ungrounded inferences or potential hallucinations. While the structure and legal understanding are good, the absence of direct textual support for the core claim raises significant concerns about its factual accuracy based solely on the provided context."
+      },
+      "composite_score": 0.4529
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "tiktok_v_garland_2025",
+      "document_title": "TikTok Inc. v. Garland",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3355.39,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4192666666666667,
+        "max_score": 0.4687,
+        "min_score": 0.3931,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.0,
+        "question_alignment": 0.25,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 2,
+        "legal_reasoning_score": 1,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer provides a clear statement regarding a legal action. However, the core statement about the Court granting applications for a writ of certiorari is not supported by the extremely limited context provided, indicating a high risk of hallucination. The answer also fails to address significant portions of the question, specifically 'what relief was denied' and 'what next step did the court direct if any', making it incomplete."
+      },
+      "composite_score": 0.3311
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "howell_v_circuit_court_of_indiana_2026",
+      "document_title": "Howell v. Circuit Court of Indiana",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 3067.28,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.3855,
+        "max_score": 0.4115,
+        "min_score": 0.358,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 27,
+        "groundedness": 0.3076923076923077,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 4,
+        "completeness_score": 5,
+        "legal_reasoning_score": 5,
+        "clarity_score": 5,
+        "hallucination_risk_score": 5,
+        "summary": "The answer correctly identifies the full case name, which is explicitly stated in the provided context. The core information is perfectly grounded. However, the answer incorrectly references 'Excerpt 1 and Excerpt 2' as the source; the case name 'HOWELL v. CIRCUIT COURT OF INDIANA' is only present in [Preamble (Part 7)], which would be 'Excerpt 2' if the parts are sequentially numbered. This minor error in citing the specific excerpt reduces the groundedness score slightly, but does not impact the accuracy of the extracted information. The answer is complete, clear, and demonstrates an accurate extraction of the requested legal information without hallucination."
+      },
+      "composite_score": 0.5987
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "howell_v_circuit_court_of_indiana_2026",
+      "document_title": "Howell v. Circuit Court of Indiana",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 2561.09,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.19723333333333332,
+        "max_score": 0.221,
+        "min_score": 0.1793,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 49,
+        "groundedness": 0.17647058823529413,
+        "question_alignment": 0.36363636363636365,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 2,
+        "legal_reasoning_score": 3,
+        "clarity_score": 4,
+        "hallucination_risk_score": 1,
+        "summary": "The answer correctly identifies 'petition for a writ of certiorari' as a procedural posture relevant to the Supreme Court. However, it significantly hallucinates the specific court, stating 'Supreme Court of Indiana' when the provided context clearly indicates 'SUPREME COURT OF THE UNITED STATES'. It also introduces a 'motion for leave to proceed in forma pauperis' and specific outcomes not explicitly mentioned in the provided excerpts. Furthermore, the answer misses another explicit procedural posture ('S. C. \u00a72255 raising ineffective-assistance-of-counsel claims,' a form of habeas review) present in the context. While clearly written, the answer demonstrates poor grounding and a high risk of factual hallucination regarding critical details."
+      },
+      "composite_score": 0.356
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "howell_v_circuit_court_of_indiana_2026",
+      "document_title": "Howell v. Circuit Court of Indiana",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3317.71,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4530666666666667,
+        "max_score": 0.483,
+        "min_score": 0.4269,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.0,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 1,
+        "hallucination_risk_score": 4,
+        "summary": "The answer is critically incomplete, cutting off mid-sentence. The provided context does not clearly state the central legal issue of the case 'Howell v. Circuit Court of Indiana.' While one snippet mentions 'frivolous filings,' attempting to infer 'the Court's practice of imposing' as the central legal issue is a weak and ungrounded interpretation, further hampered by the incompleteness of the answer. There is a high risk of hallucination as the core legal question of the case is not present in the given context."
+      },
+      "composite_score": 0.3832
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "howell_v_circuit_court_of_indiana_2026",
+      "document_title": "Howell v. Circuit Court of Indiana",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2621.59,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.44706666666666667,
+        "max_score": 0.4672,
+        "min_score": 0.4269,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 65,
+        "groundedness": 0.027777777777777776,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is almost entirely hallucinated. The provided context snippets are from a dissenting opinion and general preamble information; they do not contain the court's holding, ruling, or disposition for the majority. The answer presents a detailed disposition (denial of in forma pauperis, dismissal of certiorari, and future filing restrictions) and incorrectly attributes this information to 'Excerpt 2' from the provided context. This is a severe hallucination, as the core information in the answer is not present in the retrieved context. While the language used in the answer is clear and uses appropriate legal terminology, its complete lack of grounding makes it entirely unreliable and highly dangerous in a legal setting. It fails to extract any relevant information from the given context about the court's holding."
+      },
+      "composite_score": 0.3011
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "howell_v_circuit_court_of_indiana_2026",
+      "document_title": "Howell v. Circuit Court of Indiana",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3034.82,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.46196666666666664,
+        "max_score": 0.4769,
+        "min_score": 0.4507,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 58,
+        "groundedness": 0.12903225806451613,
+        "question_alignment": 0.375,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 2,
+        "legal_reasoning_score": 3,
+        "clarity_score": 5,
+        "hallucination_risk_score": 1,
+        "summary": "The answer directly addresses the question and is clearly written, using appropriate legal terminology. However, it explicitly attributes nearly all its factual claims to an 'Excerpt 3' which is not provided in the 'Retrieved context.' The specific details about the denial of the motion for leave to proceed in forma pauperis, the dismissal of the petition for a writ of certiorari, and the court's future directions (Rule 33.1, docketing fees) are entirely absent from the provided context snippets. The only relevant information in the provided context is the petitioner's identity (Danny W. Howell) and a general mention of the court not granting an 'extraordinary writ relentlessly sought by [McDona...]' (Preamble Part 3), which the answer does not incorporate. Therefore, the answer is severely ungrounded and presents a very high risk of hallucination, despite its good clarity of presentation."
+      },
+      "composite_score": 0.415
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "trotter_v_florida_2026",
+      "document_title": "Trotter v. Florida",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2618.55,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.3577666666666667,
+        "max_score": 0.3862,
+        "min_score": 0.328,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 32,
+        "groundedness": 0.25,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 4,
+        "legal_reasoning_score": 3,
+        "clarity_score": 3,
+        "hallucination_risk_score": 1,
+        "summary": "The answer correctly identifies the primary case name, 'MELVIN TROTTER v. FLORIDA,' which is directly available in the provided context. However, it adds 'ET AL.' as an inference that is not explicitly stated from 'FL...' in the snippet. Critically, the answer hallucinates the internal source references '(Excerpt 1)' and '(Excerpt 2),' which do not correspond to the actual context labels provided ([Preamble (Part 1)], etc.). This significantly reduces its groundedness and poses a high hallucination risk regarding its internal sourcing, despite the core factual information being correct. The clarity is slightly impacted by these incorrect references, making it harder to verify."
+      },
+      "composite_score": 0.5715
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "trotter_v_florida_2026",
+      "document_title": "Trotter v. Florida",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3480.39,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.1602,
+        "max_score": 0.1792,
+        "min_score": 0.1498,
+        "keyword_hit_rate": 0.4
+      },
+      "answer": {
+        "word_count": 53,
+        "groundedness": 0.3333333333333333,
+        "question_alignment": 0.45454545454545453,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 4,
+        "legal_reasoning_score": 2,
+        "clarity_score": 4,
+        "hallucination_risk_score": 2,
+        "summary": "The answer correctly identifies 'an application for a stay' and 'a petition for a writ of certiorari' as procedural postures, and accurately states that both were denied. It reasonably infers 'execution of a sentence of death' from the context. However, the answer significantly misstates the procedural flow by claiming the petition for a writ of certiorari was 'to the Supreme Court of Florida.' The provided context explicitly states the case is before the 'SUPREME COURT OF THE UNITED STATES,' which is the court that denies certiorari in cases originating from state courts like Florida. This fundamental misunderstanding of certiorari jurisdiction from the given context leads to low scores for groundedness, legal reasoning, and hallucination risk, despite the answer's good clarity and completeness regarding the available details."
+      },
+      "composite_score": 0.4674
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "trotter_v_florida_2026",
+      "document_title": "Trotter v. Florida",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 2813.65,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.42843333333333333,
+        "max_score": 0.446,
+        "min_score": 0.4193,
+        "keyword_hit_rate": 0.4
+      },
+      "answer": {
+        "word_count": 10,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 2,
+        "hallucination_risk_score": 3,
+        "summary": "The answer attempts to frame the central legal issue using appropriate legal phrasing ('whether') and correctly identifies 'Florida' as a key entity from the context. However, it is severely incomplete, cutting off mid-sentence and failing to state the actual legal issue. The provided context does not explicitly state the central legal issue for the main case (Trotter v. Florida), making the answer's specific phrasing ('whether Florida is likely to') a speculative construction rather than a directly grounded or strongly inferred statement. This leads to a moderate risk of hallucination regarding the specific issue framed."
+      },
+      "composite_score": 0.4573
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "trotter_v_florida_2026",
+      "document_title": "Trotter v. Florida",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 2264.36,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.3758666666666667,
+        "max_score": 0.4125,
+        "min_score": 0.331,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 56,
+        "groundedness": 0.18518518518518517,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 4,
+        "hallucination_risk_score": 1,
+        "summary": "The answer is a significant hallucination based on the provided context. The retrieved context snippets merely identify the case, note a statement by Justice Sotomayor (without content), and mention a denial of certiorari in a *different* case (Smith v. Hamm) within a dissent. The answer falsely attributes a specific holding (denial of a stay and certiorari) to the 'MELVIN TROTTER v. FL' case and fabricates the detailed reasoning and concerns of Justice Sotomayor. While the answer is clearly written, its factual claims are entirely ungrounded in the provided text."
+      },
+      "composite_score": 0.3379
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "trotter_v_florida_2026",
+      "document_title": "Trotter v. Florida",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3473.37,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.37456666666666666,
+        "max_score": 0.4168,
+        "min_score": 0.3266,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 7,
+        "groundedness": 0.25,
+        "question_alignment": 0.0,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 3,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 2,
+        "hallucination_risk_score": 4,
+        "summary": "The answer correctly identifies 'Trotter' and 'Florida' from the context, and the general idea of a claim being 'rejected' (consistent with 'not allowed further inquiry' or 'denial' in the context). However, it is extremely vague and incomplete. It fails to specify the court (e.g., Florida Supreme Court, which is mentioned), the specific relief denied (e.g., inquiry, certiorari, stay application), or any next steps directed by the court. The answer's incompleteness and lack of specificity significantly detract from its quality."
+      },
+      "composite_score": 0.3013
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "humphreys_v_emmons_2025",
+      "document_title": "Humphreys v. Emmons",
+      "question_id": "case_identity",
+      "question_category": "case-metadata",
+      "question_prompt": "What is the full case name or caption of this judicial document?",
+      "latency_ms": 2254.34,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.3968333333333333,
+        "max_score": 0.4135,
+        "min_score": 0.3837,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 21,
+        "groundedness": 0.18181818181818182,
+        "question_alignment": 1.0,
+        "keyword_coverage": 0.6,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer severely hallucinates key information. While it correctly identifies 'Humphreys' as a party from the context, the opposing party 'Emmons' and the 'v.' connector are entirely fabricated. Furthermore, the claim that this information is 'explicitly stated in Excerpt 1' is also a hallucination, as no such excerpt exists in the provided context and the information itself is not present. This demonstrates a complete lack of grounding and a high hallucination risk, leading to an incorrect and unreliable answer, despite being clearly phrased."
+      },
+      "composite_score": 0.5176
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "humphreys_v_emmons_2025",
+      "document_title": "Humphreys v. Emmons",
+      "question_id": "procedural_posture",
+      "question_category": "procedure",
+      "question_prompt": "What procedural posture is described, such as appeal, certiorari, habeas review, remand, or an order on an application?",
+      "latency_ms": 3015.82,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.2042,
+        "max_score": 0.2722,
+        "min_score": 0.166,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 9,
+        "groundedness": 0.25,
+        "question_alignment": 0.2727272727272727,
+        "keyword_coverage": 0.0,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 5,
+        "completeness_score": 1,
+        "legal_reasoning_score": 2,
+        "clarity_score": 1,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is perfectly grounded as the phrase 'petition for a' directly reflects 'ON PETITION FOR WRIT O...' from the context, and it contains no hallucinations. However, the answer is severely incomplete and unclear because it is a sentence fragment. It fails to complete the type of 'writ' (e.g., certiorari) and also misses the procedural posture of 'remanded' which is explicitly mentioned in the context."
+      },
+      "composite_score": 0.3181
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "humphreys_v_emmons_2025",
+      "document_title": "Humphreys v. Emmons",
+      "question_id": "legal_issue",
+      "question_category": "legal-issue",
+      "question_prompt": "What central legal issue or question is the court addressing?",
+      "latency_ms": 3073.0,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4216666666666667,
+        "max_score": 0.4691,
+        "min_score": 0.3821,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 11,
+        "groundedness": 0.0,
+        "question_alignment": 0.5,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 2,
+        "completeness_score": 1,
+        "legal_reasoning_score": 3,
+        "clarity_score": 2,
+        "hallucination_risk_score": 4,
+        "summary": "The answer correctly identifies the typical 'whether' format for a central legal issue and aligns with the context's hint about a court considering a legal application. However, it introduces 'Eleventh Circuit' which is not present in the provided context, indicating a hallucination. The answer is also severely incomplete, ending abruptly mid-sentence, which significantly hinders its overall quality and usefulness."
+      },
+      "composite_score": 0.4027
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "humphreys_v_emmons_2025",
+      "document_title": "Humphreys v. Emmons",
+      "question_id": "holding_or_disposition",
+      "question_category": "outcome",
+      "question_prompt": "What holding, ruling, or disposition did the court reach?",
+      "latency_ms": 3248.79,
+      "confidence": "high",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.43293333333333334,
+        "max_score": 0.4477,
+        "min_score": 0.4165,
+        "keyword_hit_rate": 0.0
+      },
+      "answer": {
+        "word_count": 42,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.2,
+        "keyword_coverage": 0.4,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 2,
+        "legal_reasoning_score": 2,
+        "clarity_score": 4,
+        "hallucination_risk_score": 5,
+        "summary": "The answer attempts to provide the court's disposition and a dissenting view using appropriate legal terminology. However, the core claim that 'The Court denied review' is not explicitly supported by the provided context. Furthermore, the detailed reasoning for the dissenting justice's proposed action (Eleventh Circuit, standard of review, vacating and remanding) is entirely ungrounded in the snippets, making it a significant hallucination. While clearly written, its lack of grounding is a major flaw."
+      },
+      "composite_score": 0.3559
+    },
+    {
+      "model_name": "gemini-2.5-flash",
+      "document_id": "humphreys_v_emmons_2025",
+      "document_title": "Humphreys v. Emmons",
+      "question_id": "relief_and_next_steps",
+      "question_category": "remedy",
+      "question_prompt": "What relief was granted or denied, and what next step did the court direct if any?",
+      "latency_ms": 3275.36,
+      "confidence": "medium",
+      "retrieval": {
+        "num_chunks": 3,
+        "avg_score": 0.4818,
+        "max_score": 0.4954,
+        "min_score": 0.4697,
+        "keyword_hit_rate": 0.2
+      },
+      "answer": {
+        "word_count": 9,
+        "groundedness": 0.16666666666666666,
+        "question_alignment": 0.25,
+        "keyword_coverage": 0.2,
+        "is_generic": false
+      },
+      "judge": {
+        "groundedness_score": 1,
+        "completeness_score": 1,
+        "legal_reasoning_score": 1,
+        "clarity_score": 2,
+        "hallucination_risk_score": 5,
+        "summary": "The answer is poorly grounded in the provided context. It states 'The Court denied review,' which is not explicitly supported by the given snippets for the current case. In fact, one snippet mentions 'this Court remanded a capital case for further consideration,' which is a 'next step' that the answer completely misses. The answer is also incomplete, cutting off abruptly. There is a high risk of hallucination as the answer invents an outcome ('denied review') not clearly present for the specific case in the context and omits a relevant 'next step' that is explicitly mentioned."
+      },
+      "composite_score": 0.347
+    }
+  ]
+}
